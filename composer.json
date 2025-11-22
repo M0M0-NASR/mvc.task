@@ -1,0 +1,13 @@
+{
+    "name": "root/www",
+    "description": "apply on Programming with gio oop section",
+    "authors": [
+        {
+            "name": "mohamed nasr"
+        }
+    ],
+    "require": {},
+    "psr-4":{
+        "App//Core":""
+    }
+}
