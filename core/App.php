@@ -14,6 +14,7 @@ class App
         });
          // register Routers off appliction
          $router->post("home/upload", [\App\Controllers\HomeController::class,"upload"]);
+         $router->get("home/show", [\App\Controllers\HomeController::class,"show"]);
         
          $router->get("home", [\App\Controllers\HomeController::class,"index"]);
         

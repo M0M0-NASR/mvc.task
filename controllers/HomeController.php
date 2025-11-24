@@ -21,10 +21,42 @@ class HomeController
         {
             $from = $_FILES["csvFile"]["tmp_name"];
             $to = UPLOADS_PATH . $_FILES["csvFile"]["name"];
-            move_uploaded_file($from, $to);
+
             
-            $_SESSION['msg'] = "File uploaded successfully!";
-            http_response_code(200);
+            move_uploaded_file($from, $to);
+            $_SESSION["msg"] = "File uploaded successfully!";
+            
+            $this->processCSV($to);
+            // http_response_code(200);
             return header("Location: /home");    
+        }
+        public function show()
+        {
+            // $this->processCSV(UPLOADS_PATH . $_FILES["csvFile"]["name"]);
+            
+        }
+
+        private function processCSV($filePath)
+        {
+        
+
+            // Implement CSV processing logic here
+            $file = fopen($filePath, 'r');
+            $transactions =[];
+            while (($data = fgetcsv($file)) !== FALSE) {
+                
+                // Process each row of the CSV
+                // echo "<pre>";
+                // print_r($data);
+                // echo "</pre>";
+                $transactions[] = $data;
+            }
+            // print_r($transactions);
+            fclose($file);
+            array_shift($transactions);
+            
+
+            
+        
         }
 }
