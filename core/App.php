@@ -13,7 +13,7 @@ class App
             echo "hello form home page" . $test;
         });
          // register Routers off appliction
-         $router->get("home/create", [\App\Controllers\HomeController::class,"create"]);
+         $router->post("home/upload", [\App\Controllers\HomeController::class,"upload"]);
         
          $router->get("home", [\App\Controllers\HomeController::class,"index"]);
         
