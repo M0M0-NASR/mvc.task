@@ -19,9 +19,12 @@ class HomeController
 
         public function upload()
         {
-            // var_dump($_FILES);
             $from = $_FILES["csvFile"]["tmp_name"];
             $to = UPLOADS_PATH . $_FILES["csvFile"]["name"];
             move_uploaded_file($from, $to);
+            
+            $_SESSION['msg'] = "File uploaded successfully!";
+            http_response_code(200);
+            return header("Location: /home");    
         }
 }

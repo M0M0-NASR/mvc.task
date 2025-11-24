@@ -6,7 +6,7 @@ use App\Core\App;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
-
+session_start();
 $application =  new App();
 
 ?>
