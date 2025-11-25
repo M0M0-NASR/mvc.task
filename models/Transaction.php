@@ -5,17 +5,17 @@ namespace App\Models;
 use App\Core\BaseModel;
 class Transaction extends BaseModel
 {
-    protected string $table = "transactions";
+    protected string $table = "Transactions1";
 
     protected int $id;
     protected float $amount;
     protected string $desc;
     protected int $check;
     protected array $fillable = [
+        'date',
+        'check_no',
+        'description',
         'amount',
-        'desc',
-        'check',
-        'created_date',
     ];
     
     public function __construct(array $attributes = [])
@@ -33,28 +33,16 @@ class Transaction extends BaseModel
     public function Store(array $data)
     {
         $fields = implode(',', $this->fillable);
-        $placeholders = ':' . implode(',:', $this->fillable);
-        
+        $sql = "INSERT INTO {$this->table} ({$fields}) VALUES ( ?, ? , ? ,? )";
+        $stmt = $this->db->prepare($sql);
         foreach ($data as $item) {
-            var_dump($item);
+            $check = (int)$item[1] ?? 1;
+            $stmt->execute([date("Y-m-d", strtotime($item[0])), $check , $item[2], (int)$this->sentize($item[3])   ]);
         }
 
-
-        // $sql = "INSERT INTO {$this->table} ({$fields}) VALUES ({$placeholders})";
-        // $stmt = $this->db->prepare($sql);
-        // /*
-        // insert into transactions (amount,desc,check,created_date) values 
-        // (:amount1,:desc1,:check1,:created_date1),
-        // (:amount2,:desc2,:check2,:created_date2),
-        // (:amount3,:desc3,:check3,:created_date3),
-        // (:amount4,:desc4,:check4,:created_date4)
-        
-        // */ 
-        // foreach ($data as $key => $value) {
-        //     $stmt->bindValue(':' . $key, $value);
-        // }
-        
-        // return $stmt->execute();
+    }
+    private function sentize($val)  {
+        return str_replace("$" , "" , $val);
     }
     
     
