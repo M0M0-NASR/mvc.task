@@ -3,6 +3,7 @@
 
 namespace App\Controllers;
 use App\Core\View;
+use App\Models\Transaction;
 class HomeController
 {
         public function index(): string
@@ -54,8 +55,9 @@ class HomeController
             // print_r($transactions);
             fclose($file);
             array_shift($transactions);
-            
+            $transactionModel=new Transaction();
 
+            $transactionModel->store($transactions);
             
         
         }

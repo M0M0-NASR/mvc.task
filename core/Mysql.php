@@ -1,16 +1,29 @@
 <?php 
-namespace App;
+namespace App\Core;
 
 use App\Core\DatabaseInterface;
 use PDO;
 class Mysql implements DatabaseInterface
 {
-    protected static ?PDO $pdo = null ;
-    private string $dbname = getenv('MYSQL_DB_DATABASE');
-    private string $host = getenv('MYSQL_DB_HOST');
-    private string $user = getenv('MYSQL_DB_USER');
-    private string $pass = getenv('MYSQL_DB_PASSWORD');
-    private string $dsn = "";    
+   protected static ?PDO $pdo = null;
+
+    private string $dbname;
+    private string $host;
+    private string $user;
+    private string $pass;
+    private string $dsn;
+
+    public function __construct()
+    {
+        $this->dbname = $_ENV['MYSQL_DB_DATABASE'];
+        
+        $this->host   = $_ENV['MYSQL_DB_HOST'];
+        $this->user   = $_ENV['MYSQL_DB_USER'];
+        $this->pass   = $_ENV['MYSQL_DB_PASSWORD'];
+
+        // Build DSN
+        $this->dsn = "mysql:host={$this->host};dbname={$this->dbname};charset=utf8mb4";
+    }
     public static function getInstance(): PDO
     {
         return static::$pdo; 

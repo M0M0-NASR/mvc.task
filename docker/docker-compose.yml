@@ -29,6 +29,7 @@ services:
   database:
     image: mariadb:latest
     container_name: mariadb
+    restart: always
     environment:
       MARIADB_ROOT_PASSWORD: root
     ports:
