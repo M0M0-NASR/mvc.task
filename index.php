@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -11,6 +11,8 @@ session_start();
 
 define('VIEW_PATH', __DIR__ . '/views/');
 define('UPLOADS_PATH', __DIR__ . '/uploads/');
-$application =  new App();
+$_REQUEST['url'] = "http://localhost:8000/public/assets/";
+
+$application = new App();
 
 ?>

@@ -1,0 +1,64 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: aliceblue;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+table {
+    padding: 10px;
+    width: 95%;
+    border-radius: 520px;
+    margin: auto;
+}  
+
+caption {
+    font-size: 40px;
+    padding: 5px;
+}
+
+thead , tbody , tfoot {
+    width: 100%;
+    
+}
+
+thead {
+    border-radius: 20px;
+}
+
+tbody , tfoot tr td {
+    text-align: center;
+}
+
+tfoot tr td:nth-child(2) {
+    text-align: right;
+    padding: 10px 5px ;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+thead th {
+    background-color: gray;
+    padding: 10px 5px;
+}
+
+tbody tr td {
+    background-color: rgb(212, 208, 208);
+    padding: 5px 5px;
+}
+
+.green :last-child{
+    color: green;
+    font-weight: bolder;
+}
+
+.red :last-child{
+    color: red;
+    font-weight: bolder;
+
+}

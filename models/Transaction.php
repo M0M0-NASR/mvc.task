@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Core\BaseModel;
 class Transaction extends BaseModel
 {
-    protected string $table = "Transactions1";
+    protected string $table = "transactions";
 
     protected int $id;
     protected float $amount;

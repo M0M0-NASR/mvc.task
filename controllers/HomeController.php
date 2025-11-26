@@ -28,36 +28,32 @@ class HomeController
         move_uploaded_file($from, $to);
         $_SESSION["msg"] = "File uploaded successfully!";
         $this->processCSV($to);
-        return header("Location: /home");
+        // return header("Location: /home");
     }
-    public function show()
+    public function show(): string
     {
         // $this->processCSV(UPLOADS_PATH . $_FILES["csvFile"]["name"]);
+        return View::make("Home/show");
 
     }
 
-    private function processCSV($filePath): string
+    private function processCSV($filePath)
     {
-
 
         $transactionModel = new Transaction();
         $file = fopen($filePath, 'r');
         $transactions = $keys = [];
 
-        [$transactions, $keys] = $transactionModel->readData($file, $transactions, $keys);
+        [$transactions, $_SESSION['keys']] = $transactionModel->readData($file, $transactions, $keys);
 
-        [$income, $expanse, $netTotal] = $transactionModel->prepareStatsToView($transactions);
+        // $transactionModel->Store($transactions);
 
-        $data = $transactionModel->prepareDataToView($transactions);
+        [$_SESSION['income'], $_SESSION['expanse'], $_SESSION['netTotal']] = $transactionModel->prepareStatsToView($transactions);
 
-        var_dump($data, $keys, $income, $expanse, $netTotal);
+        $_SESSION['data'] = $transactionModel->prepareDataToView($transactions);
+        
 
-        // return View::make("Home/show", [
-        //     "data" => $data,
-        //     "keys" => $keys,
-        //     "income" => $income,
-        //     "expanse" => $expanse,
-        //     "netTotal" => $netTotal
-        // ]);
+        return header("Location: /home/show");
+
     }
 }
