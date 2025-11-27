@@ -52,7 +52,6 @@ class HomeController
 
         $_SESSION['data'] = $transactionModel->prepareDataToView($transactions);
         
-
         return header("Location: /home/show");
 
     }
